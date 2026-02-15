@@ -1,0 +1,56 @@
+<h1>Preview</h1>
+
+<% if @errors.any? %>
+  <div style="border:1px solid #c00; padding:10px; margin-bottom:15px;">
+    <h3>Errors</h3>
+    <ul>
+      <% @errors.each do |e| %>
+        <li><%= e %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<% if @rows.any? %>
+  <h3>Valid Rows (<%= @rows.size %>)</h3>
+
+  <table border="1" cellpadding="6" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Building Name</th>
+        <th>Street Address</th>
+        <th>Unit</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Zip</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @rows.each do |r| %>
+        <tr>
+          <td><%= r[:building_name] %></td>
+          <td><%= r[:street_address] %></td>
+          <td><%= r[:unit].presence || "-" %></td>
+          <td><%= r[:city] %></td>
+          <td><%= r[:state] %></td>
+          <td><%= r[:zip_code] %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+
+  <form action="/imports/create" method="post" data-turbo="false">
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <%= hidden_field_tag :batch_id, @batch_id %>
+    <button type="submit">Finalize Report</button>
+  </form>
+
+<% else %>
+  <p>No valid rows found.</p>
+<% end %>
+
+<p style="margin-top: 20px;">
+  <a href="/">Back</a>
+</p>

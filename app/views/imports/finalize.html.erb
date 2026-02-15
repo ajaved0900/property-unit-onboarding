@@ -1,0 +1,19 @@
+<h1>Finalize Results</h1>
+
+<p><strong>Imported:</strong> <%= @imported %></p>
+<p><strong>Skipped (duplicates):</strong> <%= @skipped %></p>
+
+<% if @errors.any? %>
+  <div style="border:1px solid #c00; padding:10px; margin-top:15px;">
+    <h3>Errors During Import</h3>
+    <ul>
+      <% @errors.each do |e| %>
+        <li><%= e %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<p style="margin-top: 20px;">
+  <a href="/">Back</a>
+</p>
