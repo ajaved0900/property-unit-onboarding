@@ -1,5 +1,7 @@
 PROPERTY & UNIT ONBOARDING TOOL
-Technical Operations Engineer – Take Home Assessment
+
+Repository:
+https://github.com/ajaved0900/property-unit-onboarding
 
 --------------------------------------------------------------------------
 
@@ -53,6 +55,7 @@ has_many :units
 Rule:
 Building name is treated as a case-insensitive unique identifier.
 
+
 Unit
 
 Columns:
@@ -67,6 +70,7 @@ belongs_to :property
 
 Rule:
 Unit number must be unique per property.
+
 
 ImportBatch
 
@@ -123,6 +127,7 @@ Process:
 
 Important:
 No records are written to properties or units tables during preview.
+
 
 STEP 2 - FINALIZE
 
@@ -208,47 +213,40 @@ If property exists:
 
 Prerequisites:
 
-Install the following:
-
+Install:
 Docker Desktop
-Git (optional, not required for setup)
+Git
 Visual Studio Code (optional)
 
 Ensure Docker Desktop is running before proceeding.
 
-Setup Instructions:
+Clone Repository:
 
-1. Extract the provided ZIP file.
-2. Open a terminal (PowerShell or Command Prompt).
-3. Navigate to the project root directory (the folder containing
-   docker-compose.yml and the Dockerfile).
+git clone https://github.com/ajaved0900/property-unit-onboarding.git
+cd property-unit-onboarding
 
-Example:
-
-cd path\to\property_data_retrieval
-
-Start the application:
+Start Application:
 
 docker compose up -d --build
 
-Verify containers are running:
+Verify Containers:
 
 docker compose ps
 
-Create and migrate the database:
+Create and Migrate Database:
 
-docker compose exec web ruby bin/rails db:create
-docker compose exec web ruby bin/rails db:migrate
+docker exec -it property_data_retrieval-web-1 ruby bin/rails db:create
+docker exec -it property_data_retrieval-web-1 ruby bin/rails db:migrate
 
-Access the application:
+Access Application:
 
-Open a browser and navigate to:
+Open browser and navigate to:
 
 http://localhost:3000
 
 Usage:
 
-Upload CSV file -> Click Preview -> Click Finalize
+Upload CSV -> Preview -> Finalize
 
 --------------------------------------------------------------------------
 
@@ -295,7 +293,7 @@ docker exec -it property_data_retrieval-web-1 ruby bin/rails runner "Unit.delete
 - Allow downloadable error CSV
 - Move processing to background jobs for large files
 - Improve preview UI highlighting
-- Allow Zipcodes in the following format: 60639-11
+- Support ZIP+4 format (e.g., 60639-1111)
 
 --------------------------------------------------------------------------
 
